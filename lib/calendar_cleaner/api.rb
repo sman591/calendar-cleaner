@@ -4,9 +4,9 @@ require 'googleauth/stores/file_token_store'
 
 require 'fileutils'
 
-OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'
-APPLICATION_NAME = 'Calendar Cleaner'
-CLIENT_SECRETS_PATH = 'client_secret.json'
+OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'.freeze
+APPLICATION_NAME = 'Calendar Cleaner'.freeze
+CLIENT_SECRETS_PATH = 'client_secret.json'.freeze
 CREDENTIALS_PATH = File.join(Dir.home, '.credentials', 'calendar-ruby-quickstart.yaml')
 SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY
 
