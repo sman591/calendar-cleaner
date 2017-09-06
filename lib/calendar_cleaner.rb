@@ -1,8 +1,8 @@
 require_relative './calendar_cleaner/api'
 
 module CalendarCleaner
-  def self.run
-    api = Api.new
+  def self.run(options)
+    api = Api.new(options)
 
     puts 'Upcoming events:'
     puts 'No upcoming events found' if api.items.empty?

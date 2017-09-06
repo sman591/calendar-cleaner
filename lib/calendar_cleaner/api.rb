@@ -14,19 +14,21 @@ module CalendarCleaner
   class Api
     attr_accessor :items
 
-    def initialize
+    def initialize(options)
       # Initialize the API
       service = Google::Apis::CalendarV3::CalendarService.new
       service.client_options.application_name = APPLICATION_NAME
       service.authorization = authorize
 
       # Fetch the next 10 events for the user
-      calendar_id = 'primary'
+      calendar_id = options[:calendar]
       response = service.list_events(calendar_id,
-                                     max_results: 10,
+                                     max_results: options[:limit],
                                      single_events: true,
                                      order_by: 'startTime',
-                                     time_min: Time.now.iso8601)
+                                     time_min: options[:start].iso8601,
+                                     time_max: options[:end].iso8601,
+                                    )
       @items = response.items
     end
 

@@ -12,4 +12,6 @@ Cleans Google Calendar events based on a set of rules.
 
 ```bash
 ruby calendar-cleaner.rb
+ruby calendar-cleaner.rb --help
+ruby calendar-cleaner.rb --start "2017-01-01" --end "2017-01-07"
 ```
