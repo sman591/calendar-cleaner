@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'bundler/setup'
 
+require 'pry'
+require 'active_support/all'
 require './lib/calendar_cleaner'
 require 'optparse'
 

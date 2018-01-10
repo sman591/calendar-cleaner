@@ -8,7 +8,7 @@ OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'.freeze
 APPLICATION_NAME = 'Calendar Cleaner'.freeze
 CLIENT_SECRETS_PATH = 'client_secret.json'.freeze
 CREDENTIALS_PATH = File.join(Dir.home, '.credentials', 'calendar-ruby-quickstart.yaml')
-SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY
+SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR
 
 module CalendarCleaner
   class Api
@@ -16,19 +16,19 @@ module CalendarCleaner
 
     def initialize(options)
       # Initialize the API
-      service = Google::Apis::CalendarV3::CalendarService.new
-      service.client_options.application_name = APPLICATION_NAME
-      service.authorization = authorize
+      @service = Google::Apis::CalendarV3::CalendarService.new
+      @service.client_options.application_name = APPLICATION_NAME
+      @service.authorization = authorize
 
       # Fetch the next 10 events for the user
-      calendar_id = options[:calendar]
-      response = service.list_events(calendar_id,
-                                     max_results: options[:limit],
-                                     single_events: true,
-                                     order_by: 'startTime',
-                                     time_min: options[:start].iso8601,
-                                     time_max: options[:end].iso8601,
-                                    )
+      @calendar_id = options[:calendar]
+      response = @service.list_events(@calendar_id,
+                                      max_results: options[:limit],
+                                      single_events: true,
+                                      order_by: 'startTime',
+                                      time_min: options[:start].iso8601,
+                                      time_max: options[:end].iso8601,
+                                     )
       @items = response.items
     end
 
@@ -58,6 +58,10 @@ module CalendarCleaner
           user_id: user_id, code: code, base_url: OOB_URI)
       end
       credentials
+    end
+
+    def update_event(event)
+      @service.update_event(@calendar_id, event.id, event)
     end
   end
 end
