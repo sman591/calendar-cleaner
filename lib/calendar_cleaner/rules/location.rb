@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CalendarCleaner::Rules
   class Location < AbstractRule
     def process_event(event)

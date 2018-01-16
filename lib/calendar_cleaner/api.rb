@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'google/apis/calendar_v3'
 require 'googleauth'
 require 'googleauth/stores/file_token_store'
 
 require 'fileutils'
 
-OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'.freeze
-APPLICATION_NAME = 'Calendar Cleaner'.freeze
-CLIENT_SECRETS_PATH = 'client_secret.json'.freeze
+OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'
+APPLICATION_NAME = 'Calendar Cleaner'
+CLIENT_SECRETS_PATH = 'client_secret.json'
 CREDENTIALS_PATH = File.join(Dir.home, '.credentials', 'calendar-ruby-quickstart.yaml')
 SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR
 
@@ -27,8 +29,7 @@ module CalendarCleaner
                                       single_events: true,
                                       order_by: 'startTime',
                                       time_min: options[:start].iso8601,
-                                      time_max: options[:end].iso8601,
-                                     )
+                                      time_max: options[:end].iso8601)
       @items = response.items
     end
 
@@ -44,18 +45,21 @@ module CalendarCleaner
       client_id = Google::Auth::ClientId.from_file(CLIENT_SECRETS_PATH)
       token_store = Google::Auth::Stores::FileTokenStore.new(file: CREDENTIALS_PATH)
       authorizer = Google::Auth::UserAuthorizer.new(
-        client_id, SCOPE, token_store)
+        client_id, SCOPE, token_store
+      )
       user_id = 'default'
       credentials = authorizer.get_credentials(user_id)
       if credentials.nil?
         url = authorizer.get_authorization_url(
-          base_url: OOB_URI)
-        puts "Open the following URL in the browser and enter the " +
-             "resulting code after authorization"
+          base_url: OOB_URI
+        )
+        puts 'Open the following URL in the browser and enter the ' \
+             'resulting code after authorization'
         puts url
         code = gets
         credentials = authorizer.get_and_store_credentials_from_code(
-          user_id: user_id, code: code, base_url: OOB_URI)
+          user_id: user_id, code: code, base_url: OOB_URI
+        )
       end
       credentials
     end

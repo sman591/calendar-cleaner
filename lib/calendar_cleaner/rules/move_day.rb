@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CalendarCleaner::Rules
   class MoveDay < AbstractRule
     MONDAY = 1

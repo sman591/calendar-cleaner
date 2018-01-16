@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './calendar_cleaner/api'
 require_relative './calendar_cleaner/rules/rules'
 

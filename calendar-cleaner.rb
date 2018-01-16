@@ -1,3 +1,6 @@
+# rubocop:disable Naming/FileName
+# frozen_string_literal: true
+
 require 'rubygems'
 require 'bundler/setup'
 
@@ -17,15 +20,13 @@ DEFAULT_OPTIONS = {
 options = DEFAULT_OPTIONS.dup
 
 OptionParser.new do |parser|
-  parser.on('-c', '--calendar CALENDAR ID', 'The calendar to operate on.', 'Default: #{options[:calendar]}') do |v|
+  parser.on('-c', '--calendar CALENDAR ID', 'The calendar to operate on.', "Default: #{options[:calendar]}") do |v|
     options[:calendar] = v
   end
 
   parser.on('--start DATE', 'Start date of events to process', 'Default: Time.now') do |v|
     options[:start] = Date.parse(v).to_time
-    if options[:end] == DEFAULT_OPTIONS[:end]
-      options[:end] = options[:start] + HOURS_24
-    end
+    options[:end] = options[:start] + HOURS_24 if options[:end] == DEFAULT_OPTIONS[:end]
   end
 
   parser.on('--end DATE', 'End date of events to process', 'Default: Time.now + 24 hours') do |v|
@@ -38,9 +39,7 @@ OptionParser.new do |parser|
 end.parse!
 
 # Validate options
-if options[:start] > options[:end]
-  throw "Start date (#{options[:start]} cannot be after end date (#{options[:end]})"
-end
+throw "Start date (#{options[:start]} cannot be after end date (#{options[:end]})" if options[:start] > options[:end]
 
 # Print out the options for debugging
 puts 'Options:'
@@ -48,3 +47,5 @@ puts options.inspect
 puts
 
 CalendarCleaner.run(options)
+
+# rubocop:enable Naming/FileName

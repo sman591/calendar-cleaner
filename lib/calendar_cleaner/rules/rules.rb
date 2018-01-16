@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'abstract_rule'
 require_relative 'logging'
 require_relative 'timezones'

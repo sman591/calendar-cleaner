@@ -1,10 +1,11 @@
 # frozen_string_literal: true
-source "https://rubygems.org"
 
-ruby IO.read(File.expand_path("../.ruby-version", __FILE__)).chomp
+source 'https://rubygems.org'
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+ruby IO.read(File.expand_path('../.ruby-version', __FILE__)).chomp
 
-gem "google-api-client", "~> 0.13.5" # 0.x releases are breaking
-gem "pry"
-gem "activesupport", "~> 5.1.4"
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
+
+gem 'activesupport', '~> 5.1.4'
+gem 'google-api-client', '~> 0.13.5' # 0.x releases are breaking
+gem 'pry'
