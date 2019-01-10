@@ -29,6 +29,11 @@ module CalendarCleaner::Rules
         event.summary.sub!('Engr', 'Eng')
         changed = true
       end
+      if event.summary.include?('Maple Syrup & Our Environment')
+        puts ' --> Abbreviating Maple Syrup'
+        event.summary.sub!('Maple Syrup & Our Environment', 'Maple Syrup')
+        changed = true
+      end
       changed
     end
   end

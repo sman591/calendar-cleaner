@@ -9,7 +9,7 @@ module CalendarCleaner::Rules
                     event.recurring_event_id.blank?
       puts ' --> Moving event up 3 hours and setting America/New_York timezone'
       [event.start, event.end].each do |piece|
-        piece.date_time -= 3.hours
+        piece.date_time += 3.hours
         piece.time_zone = 'America/New_York'
       end
       true
