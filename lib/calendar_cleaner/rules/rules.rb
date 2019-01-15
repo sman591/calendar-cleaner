@@ -6,6 +6,7 @@ require_relative 'timezones'
 require_relative 'shorten_name'
 require_relative 'location'
 require_relative 'move_day'
+require_relative 'swap_class'
 
 module CalendarCleaner::Rules
 end

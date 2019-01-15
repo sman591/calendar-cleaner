@@ -13,6 +13,7 @@ module CalendarCleaner
       CalendarCleaner::Rules::ShortenName.new,
       CalendarCleaner::Rules::Location.new,
       CalendarCleaner::Rules::MoveDay.new,
+      CalendarCleaner::Rules::SwapClass.new,
     ]
 
     puts 'Upcoming events:'
