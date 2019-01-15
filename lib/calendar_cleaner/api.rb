@@ -63,5 +63,9 @@ module CalendarCleaner
     def update_event(event)
       @service.update_event(@calendar_id, event.id, event)
     end
+
+    def delete_event(event)
+      @service.delete_event(@calendar_id, event.id)
+    end
   end
 end
